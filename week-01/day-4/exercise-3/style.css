@@ -1,8 +1,8 @@
 .greenbox {
   background-color: green;
-  width: 256px;
-  padding: 20px 16px;
-  margin: 10px 10px 10px 104px;
+  width: 250px;
+  padding: 20px;
+  margin: 10px;
 }
 
 .box {
@@ -10,8 +10,8 @@
   color: #0000AA;
   background-color: yellow;
   border: 4px solid black;
-  width: 208px;
-  padding: 20px 12px 17px 20px;
+  width: 204px;
+  padding: 18px;
   margin: auto;
 }
 
@@ -20,7 +20,7 @@
   color: #AA0000;
   background-color: cyan;
   border: 4px solid black;
-  width: 208px;
-  padding: 20px 12px 17px 20px;
+  width: 204px;
+  padding: 18px;
   margin: auto;
 }
