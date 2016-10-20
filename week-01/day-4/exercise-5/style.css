@@ -1,0 +1,31 @@
+body {
+  padding-left: 104px;
+  padding-top: 22px;
+}
+
+h1 {
+  color: blue;
+}
+
+
+h2 {
+  color: orange;
+}
+
+ul {
+  list-style-type: square;
+  color: blue;
+}
+
+ul li ul {
+  list-style-type: disc;
+  color: black
+}
+
+ul li ul li:first-child {
+  color: red;
+}
+
+ol li {
+  color: black;
+}
