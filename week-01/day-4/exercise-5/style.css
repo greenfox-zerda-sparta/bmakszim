@@ -13,7 +13,7 @@ ul {
 }
 
 ul li ul {
-  color: black
+  color: black;
   list-style-type: disc;
 }
 
