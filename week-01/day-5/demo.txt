@@ -1,0 +1,1 @@
+for i in {10..50}; do magick image.jpg -crop 200x200+${i}0+50 cropped_image0${i}.jpg; done
