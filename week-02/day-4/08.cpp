@@ -2,18 +2,10 @@
 
 using namespace std;
 
-void triangle (int number) {
-  int temp = number-1;
-  for (int i = 1; i <= number*2; i+=2) {
-    for (int k = temp; k > 0; k--) {
-      cout << " ";
-    }
-    temp--;
-    for (int j = 1; j <= i; j++) {
-	    cout << '*';
-	}
-  cout << endl;
-  }
+void swap (int*a, int* b) {
+	int temp = a;
+	a = b;
+	b = temp;
 }
 
 int main() {
@@ -28,7 +20,10 @@ int main() {
 	  //
 	  // The triangle should have as many lines as the value in the argument
 
-  int number = 7;
-  triangle (number);
+  int a = 7;
+  int b = 6;
+
+  swap (a, b);
+  cout << a, b << endl;
   return 0;
 }
