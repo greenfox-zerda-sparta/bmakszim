@@ -6,8 +6,6 @@
 using namespace std;
 
 class Song {
-private:
-
 protected:
   string artist;
   string title;
@@ -22,8 +20,5 @@ public:
   virtual string get_genre() = 0;
   virtual bool rate(unsigned int _r) = 0;
 };
-
-
-
 
 #endif

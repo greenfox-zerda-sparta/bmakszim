@@ -1,10 +1,6 @@
 #ifndef POP_HPP_
 #define POP_HPP_
 
-#include <string>
-
-using namespace std;
-
 class Pop: public Song {
 private:
   string genre;
@@ -13,7 +9,5 @@ public:
   string get_genre();
   bool rate(unsigned int _r);
 };
-
-
 
 #endif

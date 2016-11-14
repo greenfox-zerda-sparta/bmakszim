@@ -1,9 +1,5 @@
 #include "Song.hpp"
 #include "Reggae.hpp"
-#include <string>
-#include <iostream>
-
-using namespace std;
 
 Reggae::Reggae(string _a, string _t){
   artist = _a;

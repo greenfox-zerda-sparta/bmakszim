@@ -1,9 +1,5 @@
 #include "Song.hpp"
 #include "Rock.hpp"
-#include <string>
-#include <iostream>
-
-using namespace std;
 
 Rock::Rock(string _a, string _t){
   artist = _a;

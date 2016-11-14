@@ -1,10 +1,6 @@
 #ifndef JUKEBOX_HPP_
 #define JUKEBOX_HPP_
 
-#include <string>
-
-using namespace std;
-
 #include "Song.hpp"
 
 class Jukebox {
@@ -20,8 +16,6 @@ public:
   float get_genre_rating(string _g);
   string get_top_rated_title();
   string get_top_rated_genre();
-  void get_genres();
 };
-
 
 #endif

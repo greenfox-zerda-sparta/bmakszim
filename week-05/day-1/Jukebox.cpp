@@ -1,8 +1,4 @@
 #include "Jukebox.hpp"
-#include <iostream>
-#include <string>
-
-using namespace std;
 
 string genres[50];
 unsigned int count_genres = 0;
@@ -101,10 +97,4 @@ string Jukebox::get_top_rated_genre() {
     }
   }
   return top_genre;
-}
-
-void Jukebox::get_genres() {
-  for (unsigned int i = 0; i < count_genres; i++) {
-    cout << genres[i] << endl;
-  }
 }

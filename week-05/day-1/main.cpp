@@ -1,12 +1,9 @@
 #include <iostream>
-#include <string>
 #include "Song.hpp"
 #include "Rock.hpp"
 #include "Pop.hpp"
 #include "Reggae.hpp"
 #include "Jukebox.hpp"
-
-using namespace std;
 
 int main() {
   Rock r01("Radiohead", "Decks Dark"); r01.rate(5); r01.rate(5); r01.rate(4); r01.rate(1); r01.rate(4);

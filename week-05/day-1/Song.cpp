@@ -1,13 +1,7 @@
 #include "Song.hpp"
-#include <string>
-#include <iostream>
-
-using namespace std;
-
-int LAST_ID = -1;
 
 Song::Song() {
-  LAST_ID++;
+  ;
 }
 
 string Song::get_artist() {

@@ -1,9 +1,5 @@
 #include "Song.hpp"
 #include "Pop.hpp"
-#include <string>
-#include <iostream>
-
-using namespace std;
 
 Pop::Pop(string _a, string _t){
   artist = _a;
