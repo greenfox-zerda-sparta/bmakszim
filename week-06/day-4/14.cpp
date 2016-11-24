@@ -10,6 +10,7 @@ using namespace std;
 vector<string> car_types = {"Moszkvics", "Volga", "ZISZ", "Tatra", "Zbrojovka", "Hotchkiss", "DAF", "Warszawa",
   "Puli", "Balaton", "Benz", "Marauder", "Zsiguli" , "IFA", "Fjord", "Trabant", "Wartburg", "Martini"};
 vector<string> colours = {"Piros", "Narancssárga", "Zöld", "Kék", "Türkiz", "Barna", "Lila", "Sárga", "Fekete", "Fehér"};
+vector<string> temp_plate;
 
 char random_char() {
   int temp = rand() % 26 + 65;
@@ -81,7 +82,19 @@ void Car::set_colour() {
 }
 
 void Car::set_plate() {
-  plate = random_plate();
+  bool unique;
+  string temp;
+  do {
+	unique = 1;
+    temp = random_plate();
+    for (unsigned int i = 0; i < temp_plate.size(); i++) {
+      if (temp == temp_plate[i]) {
+        unique = 0;
+      }
+    }
+  } while (unique == 0);
+  temp_plate.push_back(temp);
+  plate = temp;
 }
 
 int main() {
