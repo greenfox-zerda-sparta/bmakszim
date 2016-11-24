@@ -106,19 +106,22 @@ int main() {
   fill_parking_house();
   int counter = 0;
   vector<Car> temp;
+  vector<string> pos;
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 4; j++) {
       for (int k = 0; k < 4; k++) {
         if (parking_house[i][j][k].get_colour() == colours.at(7) && parking_house[i][j][k].get_name() == car_types.at(12)) {
           counter++;
           temp.push_back(parking_house[i][j][k]);
+          pos.push_back(to_string(i+1) + "-" + to_string(j+1) + "-" + to_string(k+1));
         }
       }
     }
   }
   cout << counter << " db sárga Zsiguli van." << endl;
   for (unsigned int i = 0; i < temp.size(); i++) {
-    cout << temp[i].get_plate() << endl;
+    cout << temp[i].get_plate();
+    cout << ' ' << pos[i] << " pozícioban" << endl;
   }
 
 //  cout << parking_house[0][0][0].get_plate() << endl << parking_house[0][0][0].get_name() << endl << parking_house[0][0][0].get_colour() << endl;
