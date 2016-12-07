@@ -11,6 +11,7 @@ MyGame::MyGame() {
   }
   this->read_map();
   this->place_skeletons();
+  this->place_boss();
   char_x = 0;
   char_y = 0;
   hero_stance = 0;
@@ -24,6 +25,7 @@ void MyGame::init(GameContext& context) {
   context.load_file("hero-left.bmp");
   context.load_file("hero-right.bmp");
   context.load_file("skeleton.bmp");
+  context.load_file("boss.bmp");
 }
 void MyGame::render(GameContext& context) {
   v[char_x][char_y] = 2;
@@ -38,6 +40,8 @@ void MyGame::render(GameContext& context) {
         context.draw_sprite("wall.bmp", i*72, j*72);
       } else if (v[i][j] == 3) {
         context.draw_sprite("skeleton.bmp", i*72, j*72);
+      } else if (v[i][j] == 4) {
+        context.draw_sprite("boss.bmp", i*72, j*72);
       }
     }
   }
@@ -114,19 +118,34 @@ void MyGame::place_skeletons() {
   int x;
   int y;
   int m = 0;
-  bool u = true;
+  bool u;
   for (int i = 0; i < 3; i++) {
     do {
       u = true;
-      x = rand() % 5 + (((i%2) + 1) % 2) * 5;
+      x = rand() % 5 + (((i%2) + 1) % 2) * 5; //in order to be placed in different quarter of the map
       if (i > 0) {
         m = 1;
       }
-      y = rand() % 5 + (m * 5);
+      y = rand() % 5 + (m * 5);  //in order to be placed in different quarter of the map
       if (v[x][y] == 0 || v[x][y] == 3) {
         u = false;
       }
     } while (u == false);
     v[x][y] = 3;
   }
+}
+
+void MyGame::place_boss() {
+  int x;
+  int y;
+  bool u;
+  do {
+    u = false;
+    x = rand() % 7 + 3;
+    y = rand() % 7 + 3;
+    if (v[x][y] == 1) {
+      u = true;
+    }
+  } while (u == false);
+  v[x][y] = 4;
 }

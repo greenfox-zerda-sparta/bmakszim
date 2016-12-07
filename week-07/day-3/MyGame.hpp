@@ -21,6 +21,7 @@ public:
   string set_hero();
   void read_map();
   void place_skeletons();
+  void place_boss();
 };
 
 #endif
