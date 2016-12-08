@@ -1,14 +1,8 @@
 #include "MyGame.hpp"
+#include "SDL2/SDL_ttf.h"
+#include <iostream>
 
 MyGame::MyGame() {
-  for (int i = 0; i < 10; i++) {
-    v.push_back(vector<int>());
-  }
-  for (int i = 0; i < 10; i++) {
-    for (int j = 0; j < 10; j++) {
-	  v[i].push_back(0);
-    }
-  }
   this->read_map();
   this->place_skeletons();
   this->place_boss();
@@ -16,60 +10,51 @@ MyGame::MyGame() {
   char_y = 0;
   hero_stance = 0;
 }
+
 void MyGame::init(GameContext& context) {
-  context.load_file("floor.bmp");
-  context.load_file("wall.bmp");
-  context.load_file("hero.bmp");
-  context.load_file("hero-up.bmp");
-  context.load_file("hero-down.bmp");
-  context.load_file("hero-left.bmp");
-  context.load_file("hero-right.bmp");
-  context.load_file("skeleton.bmp");
-  context.load_file("boss.bmp");
+  context.load_file(FLOOR);
+  context.load_file(WALL);
+  context.load_file(HERO);
+  context.load_file(HERO_UP);
+  context.load_file(HERO_DOWN);
+  context.load_file(HERO_LEFT);
+  context.load_file(HERO_RIGHT);
+  context.load_file(SKELETON);
+  context.load_file(BOSS);
 }
+
 void MyGame::render(GameContext& context) {
-  v[char_x][char_y] = 2;
-  string hero = set_hero();
+  v[char_x][char_y] = set_hero();
   for (int i = 0; i < 10; i++) {
     for (int j = 0; j < 10; j++) {
-  	  if (v[i][j] == 2) {
-  	    context.draw_sprite(hero, i*72, j*72);
-  	  } else if (v[i][j] == 1) {
-      context.draw_sprite("floor.bmp", i*72, j*72);
-      } else if (v[i][j] == 0) {
-        context.draw_sprite("wall.bmp", i*72, j*72);
-      } else if (v[i][j] == 3) {
-        context.draw_sprite("skeleton.bmp", i*72, j*72);
-      } else if (v[i][j] == 4) {
-        context.draw_sprite("boss.bmp", i*72, j*72);
-      }
+  	  context.draw_sprite(v[i][j], i*72, j*72);
     }
   }
   if (context.was_key_pressed(ARROW_DOWN)) {
     hero_stance = 3;
-    if (char_y != 9 && v[char_x][char_y + 1] != 0) {
-      v[char_x][char_y] = 1;
+    if (char_y != 9 && v[char_x][char_y + 1] != WALL) {
+      v[char_x][char_y] = FLOOR;
       char_y++;
     }
   }
   if (context.was_key_pressed(ARROW_RIGHT)) {
     hero_stance = 2;
-    if (char_x != 9 && v[char_x + 1][char_y] != 0) {
-      v[char_x][char_y] = 1;
+    if (char_x != 9 && v[char_x + 1][char_y] != WALL) {
+      v[char_x][char_y] = FLOOR;
       char_x++;
     }
   }
   if (context.was_key_pressed(ARROW_UP)) {
     hero_stance = 1;
-    if (char_y != 0 && v[char_x][char_y - 1] != 0) {
-      v[char_x][char_y] = 1;
+    if (char_y != 0 && v[char_x][char_y - 1] != WALL) {
+      v[char_x][char_y] = FLOOR;
       char_y--;
     }
   }
   if (context.was_key_pressed(ARROW_LEFT)) {
     hero_stance = 4;
-    if (char_x != 0 && v[char_x - 1][char_y] != 0) {
-      v[char_x][char_y] = 1;
+    if (char_x != 0 && v[char_x - 1][char_y] != WALL) {
+      v[char_x][char_y] = FLOOR;
       char_x--;
     }
   }
@@ -77,25 +62,25 @@ void MyGame::render(GameContext& context) {
 }
 
 string MyGame::set_hero() {
-  string hero;
+  string hero_;
   switch (hero_stance) {
     case 1:
-      hero = "hero-up.bmp";
+      hero_ = "hero-up.bmp";
       break;
     case 2:
-      hero = "hero-right.bmp";
+      hero_ = "hero-right.bmp";
       break;
     case 3:
-      hero = "hero-down.bmp";
+      hero_ = "hero-down.bmp";
       break;
     case 4:
-      hero = "hero-left.bmp";
+      hero_ = "hero-left.bmp";
       break;
     case 0:
-      hero = "hero.bmp";
+      hero_ = "hero.bmp";
       break;
   }
-  return hero;
+  return hero_;
 }
 
 void MyGame::read_map() {
@@ -105,9 +90,14 @@ void MyGame::read_map() {
   char temp;
   int i = 0;
   while (file >> buffer) {
+    v.push_back(vector<string>());
     for (int j = 0; j < 10; j++) {
       temp = buffer[j];
-      v[j][i] = int(temp) - 48;
+      if (temp == '1') {
+        v[i].push_back(FLOOR);
+      } else {
+        v[i].push_back(WALL);
+      }
     }
     i++;
   }
@@ -127,11 +117,11 @@ void MyGame::place_skeletons() {
         m = 1;
       }
       y = rand() % 5 + (m * 5);  //in order to be placed in different quarter of the map
-      if (v[x][y] == 0 || v[x][y] == 3) {
+      if (v[x][y] == WALL || v[x][y] == SKELETON) {
         u = false;
       }
     } while (u == false);
-    v[x][y] = 3;
+    v[x][y] = SKELETON;
   }
 }
 
@@ -143,9 +133,9 @@ void MyGame::place_boss() {
     u = false;
     x = rand() % 7 + 3;
     y = rand() % 7 + 3;
-    if (v[x][y] == 1) {
+    if (v[x][y] == FLOOR) {
       u = true;
     }
   } while (u == false);
-  v[x][y] = 4;
+  v[x][y] = BOSS;
 }

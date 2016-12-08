@@ -8,12 +8,23 @@
 
 using namespace std;
 
+const string FLOOR = "floor.bmp";
+const string WALL = "wall.bmp";
+const string HERO = "hero.bmp";
+const string HERO_UP = "hero-up.bmp";
+const string HERO_DOWN = "hero-down.bmp";
+const string HERO_LEFT = "hero-left.bmp";
+const string HERO_RIGHT = "hero-right.bmp";
+const string SKELETON = "skeleton.bmp";
+const string BOSS = "boss.bmp";
+
 class MyGame : public Game {
 private:
-  vector<vector<int>>v;
   int char_x;
   int char_y;
   int hero_stance;
+protected:
+  vector<vector<string>>v;
 public:
   MyGame();
   virtual void init(GameContext& context);
