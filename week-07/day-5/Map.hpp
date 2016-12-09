@@ -12,6 +12,7 @@ private:
   vector<vector<string>>m;
 public:
   Map();
+  unsigned int get_level();
   vector<vector<string>> get_m();
 };
 

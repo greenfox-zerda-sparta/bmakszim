@@ -1,6 +1,9 @@
 #include "MyGame.hpp"
+//#include <iostream>
 
 MyGame::MyGame() {
+  level = 1;
+  game_logic = new Game_logic();
   steps = 1;
   map = new Map();
   v = map->get_m();
@@ -18,6 +21,8 @@ MyGame::~MyGame() {
   }
   delete map;
   map = NULL;
+  delete game_logic;
+  game_logic = NULL;
 }
 
 void MyGame::init(GameContext& context) {
@@ -73,14 +78,19 @@ void MyGame::render(GameContext& context) {
     for (unsigned int i = 0; i < obj.size() - 2; i++) {
       do {
         n = rand() % 4;
-        if (n == 0) {
-          m = move_right(i);
-        } else if (n == 1) {
-          m = move_down(i);
-        } else if (n == 2) {
-          m = move_left(i);
-        } else if (n == 3) {
-          m = move_up(i);
+        switch (n) {
+          case 0:
+            m = move_right(i);
+            break;
+          case 1:
+            m = move_down(i);
+            break;
+          case 2:
+            m = move_left(i);
+            break;
+          case 3:
+            m = move_up(i);
+            break;
         }
       } while (m == false);
     }

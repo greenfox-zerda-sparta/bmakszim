@@ -2,6 +2,7 @@
 #define HERO_HPP_
 
 #include "game_object.hpp"
+#include "Map.hpp"
 
 class Hero: public Game_object {
 private:

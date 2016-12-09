@@ -5,6 +5,7 @@
 #include <vector>
 #include "game-engine.hpp"
 #include "game_object.hpp"
+#include "game_logic.hpp"
 #include "Map.hpp"
 #include "Hero.hpp"
 #include "Skeleton.hpp"
@@ -29,6 +30,8 @@ private:
   Map* map;
   vector<vector<string>>v;
   vector<Game_object*> obj;
+  Game_logic* game_logic;
+  int level;
 
 public:
   MyGame();

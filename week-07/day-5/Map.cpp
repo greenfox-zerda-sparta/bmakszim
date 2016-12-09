@@ -19,6 +19,9 @@ Map::Map() {
   file.close();
 }
 
+unsigned int Map::get_level() {
+}
+
 vector<vector<string>> Map::get_m() {
   return m;
 }

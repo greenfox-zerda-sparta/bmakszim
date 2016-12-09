@@ -35,3 +35,28 @@ int Game_object::get_hero_stance() {
 void Game_object::set_hero_stance(int s) {
 
 }
+
+int Game_object::get_max_hp() {
+  return max_hp;
+}
+void Game_object::set_max_hp(int _max_hp) {
+  max_hp = _max_hp;
+}
+int Game_object::get_current_hp() {
+  return current_hp;
+}
+void Game_object::set_current_hp(int _current_hp) {
+  current_hp = _current_hp;
+}
+int Game_object::get_defend() {
+  return defend;
+}
+void Game_object::set_defend(int _defend) {
+  defend = _defend;
+}
+int Game_object::get_strike() {
+  return strike;
+}
+void Game_object::set_strike(int _strike) {
+  strike = _strike;
+}
