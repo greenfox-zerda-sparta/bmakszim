@@ -30,9 +30,11 @@ using namespace std;
 // What is the longest word in Alice in Wonderland?
 // How many characters does it have?
 
-bool is_letter(char c) {
-  return ((c > 64  && c < 91) || (c > 96 && c < 123));
-}
+bool is_uppercase(char c);
+
+bool is_letter(char c);
+
+bool is_hyphen(char c);
 
 int main() {
   map<string, int> m;
@@ -41,42 +43,57 @@ int main() {
   string buffer;
   while (file >> buffer) {
     string cache = "";
-    int itemp;
-    char ctemp;
+    int ascii_of_char;
+    char char_temp;
     for (unsigned int i = 0; i < buffer.length(); i++) {
-      itemp = buffer[i];
-      if (itemp == 39 || itemp == 45 || (itemp > 64
-          && itemp < 91) || (itemp > 96 && itemp < 123)) {
-        if (itemp > 64 && itemp < 91) {
-          itemp += 32;
-          ctemp = itemp;
-          cache += ctemp;
-        } else if ( itemp == 45) {
+      ascii_of_char = buffer[i];
+      if (is_hyphen(ascii_of_char) || is_letter(ascii_of_char)) {
+
+        if (is_uppercase(ascii_of_char)) {
+          ascii_of_char += 32;
+          char_temp = ascii_of_char;
+          cache += char_temp;
+
+        } else if (is_hyphen(ascii_of_char)) {
           if (is_letter(buffer[i+1]) && is_letter(buffer[i-1])) {
-            ctemp = itemp;
-            cache += ctemp;
+            char_temp = ascii_of_char;
+            cache += char_temp;
           } else {
             if (cache != "") {
-              m[cache] ++;
+              m[cache]++;
             }
-            //cout << cache << "itt" << endl; //////
             cache = "";
           }
+
         } else {
-          ctemp = itemp;
-          cache += ctemp;
+          char_temp = ascii_of_char;
+          cache += char_temp;
+
         }
       }
     }
     if (cache != "") {
-      m[cache] ++;
+      m[cache]++;
     }
-    //cout << cache << "ott" << endl; /////
   }
   file.close();
+
   for (map<string, int>::iterator it = m.begin(); it != m.end(); it++) {
     cout << it->first << " -> " << it->second << ';';
     cout << endl;
   }
+
   return 0;
+}
+
+bool is_uppercase(char c) {
+  return (c > 64 && c < 91);
+}
+
+bool is_letter(char c) {
+  return (is_uppercase(c) || (c > 96 && c < 123));
+}
+
+bool is_hyphen(char c) {
+  return (c == 45);
 }
