@@ -50,21 +50,21 @@ int main(int argc, char ** argv) {
       }
     }
     if (!game.get_next()) {
-    if (event.type == SDL_MOUSEBUTTONDOWN) {
-      int _x;
-      int _y;
-      SDL_GetMouseState(&_x, &_y);
-      if (!game.is_won()) {
-        game.set_cell((_x / (width / 19)), (_y / (height / 19)));
-        //SDLnet
-        int array[2] = {(_x / (width / 19)), (_y / (height / 19))};
-        SDLNet_TCP_Send(client, &array, 2 * sizeof(int));
+      if (event.type == SDL_MOUSEBUTTONDOWN) {
+        int _x;
+        int _y;
+        SDL_GetMouseState(&_x, &_y);
+        if (!game.is_won()) {
+          game.set_cell((_x / (width / 19)), (_y / (height / 19)));
+          //SDLnet
+          int array[2] = {(_x / (width / 19)), (_y / (height / 19))};
+          SDLNet_TCP_Send(client, &array, 2 * sizeof(int));
 
-        //SDLnet
-        _draw(game.get_vector());
+          //SDLnet
+          _draw(game.get_vector());
+        }
+        cout << game.is_won() << endl;
       }
-      cout << game.is_won() << endl;
-    }
     } else {
       int _x;
       int _y;
