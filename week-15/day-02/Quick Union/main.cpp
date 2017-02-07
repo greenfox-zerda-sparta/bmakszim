@@ -2,14 +2,33 @@
 #include <iostream>
 #include "quick_union.h"
 
+void draw(vector<vector<int>>v);
+
 int main()
 {
   Quick_union m_union(10);
-  m_union.unite(0, 1);
-  m_union.unite(9, 3);
-  m_union.unite(8, 9);
-  m_union.unite(6, 7);
-  vector<vector<int>>v = m_union.get_groups();
+  m_union.unite(3, 4);
+  draw(m_union.get_groups());
+  m_union.unite(4, 9);
+  draw(m_union.get_groups());
+  m_union.unite(8, 0);
+  draw(m_union.get_groups());
+  m_union.unite(2, 3);
+  draw(m_union.get_groups());
+  m_union.unite(5, 6);
+  draw(m_union.get_groups());
+  m_union.unite(5, 9);
+  draw(m_union.get_groups());
+  m_union.unite(7, 3);
+  draw(m_union.get_groups());
+  m_union.unite(4, 8);
+  draw(m_union.get_groups());
+  m_union.unite(6, 1);
+  draw(m_union.get_groups());
+  return 0;
+}
+
+void draw(vector<vector<int>>v) {
   for (int i = 0; i < v.size(); i++) {
     std::cout << "{";
     for (int j = 0; j < v[i].size(); j++) {
@@ -24,6 +43,5 @@ int main()
     }
   }
   std::cout << std::endl;
-  return 0;
+  std::cout << std::endl;
 }
-
