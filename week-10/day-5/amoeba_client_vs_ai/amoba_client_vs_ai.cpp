@@ -28,7 +28,7 @@ int main(int argc, char ** argv) {
   IPaddress ip;
   SDLNet_SocketSet set;
   set = SDLNet_AllocSocketSet(2);
-  SDLNet_ResolveHost(&ip, "10.27.99.170", 1234);
+  SDLNet_ResolveHost(&ip, "127.0.0.1", 1234);
   TCPsocket client = SDLNet_TCP_Open(&ip);
   SDLNet_TCP_AddSocket(set, client);
   /////////////////SDL_NET///////////////
@@ -43,7 +43,7 @@ int main(int argc, char ** argv) {
   while (!quit) {
 
     v = game.get_vector();
-    SDL_WaitEvent(&event);
+    SDL_PollEvent(&event);
     if (event.type == SDL_QUIT) {
       quit = true;
       break;
